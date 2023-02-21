@@ -1,0 +1,468 @@
+ 
+Comparing 1 with 2 matches = 39
+ 
+Comparing 1 with 3 matches = 62
+ 
+Comparing 1 with 4 matches = 33
+ 
+Comparing 1 with 5 matches = 40
+ 
+Comparing 1 with 6 matches = 47
+ 
+Comparing 1 with 7 matches = 75
+ 
+Comparing 1 with 8 matches = 12
+ 
+Comparing 1 with 9 matches = 34
+ 
+ 
+ 
+Comparing 2 with 3 matches = 85
+ 
+Comparing 2 with 4 matches = 26
+ 
+Comparing 2 with 5 matches = 44
+ 
+Comparing 2 with 6 matches = 128
+ 
+Comparing 2 with 7 matches = 62
+ 
+Comparing 2 with 8 matches = 11
+ 
+Comparing 2 with 9 matches = 31
+ 
+ 
+ 
+ 
+Comparing 3 with 4 matches = 62
+ 
+Comparing 3 with 5 matches = 64
+ 
+Comparing 3 with 6 matches = 93
+ 
+Comparing 3 with 7 matches = 125
+ 
+Comparing 3 with 8 matches = 22
+ 
+Comparing 3 with 9 matches = 67
+ 
+ 
+ 
+ 
+ 
+Comparing 4 with 5 matches = 31
+ 
+Comparing 4 with 6 matches = 35
+ 
+Comparing 4 with 7 matches = 60
+ 
+Comparing 4 with 8 matches = 13
+ 
+Comparing 4 with 9 matches = 33
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 5 with 6 matches = 51
+ 
+Comparing 5 with 7 matches = 66
+ 
+Comparing 5 with 8 matches = 13
+ 
+Comparing 5 with 9 matches = 32
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 6 with 7 matches = 101
+ 
+Comparing 6 with 8 matches = 11
+ 
+Comparing 6 with 9 matches = 25
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 7 with 8 matches = 15
+ 
+Comparing 7 with 9 matches = 203
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 8 with 9 matches = 17
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 1 with 2 matches = 39
+ 
+Comparing 1 with 3 matches = 62
+ 
+Comparing 1 with 4 matches = 33
+ 
+Comparing 1 with 5 matches = 40
+ 
+Comparing 1 with 6 matches = 47
+ 
+Comparing 1 with 7 matches = 75
+ 
+Comparing 1 with 8 matches = 12
+ 
+Comparing 1 with 9 matches = 34
+ 
+ 
+ 
+Comparing 2 with 3 matches = 85
+ 
+Comparing 2 with 4 matches = 26
+ 
+Comparing 2 with 5 matches = 44
+ 
+Comparing 2 with 6 matches = 128
+ 
+Comparing 2 with 7 matches = 62
+ 
+Comparing 2 with 8 matches = 11
+ 
+Comparing 2 with 9 matches = 31
+ 
+ 
+ 
+ 
+Comparing 3 with 4 matches = 62
+ 
+Comparing 3 with 5 matches = 64
+ 
+Comparing 3 with 6 matches = 93
+ 
+Comparing 3 with 7 matches = 125
+ 
+Comparing 3 with 8 matches = 22
+ 
+Comparing 3 with 9 matches = 67
+ 
+ 
+ 
+ 
+ 
+Comparing 4 with 5 matches = 31
+ 
+Comparing 4 with 6 matches = 35
+ 
+Comparing 4 with 7 matches = 60
+ 
+Comparing 4 with 8 matches = 13
+ 
+Comparing 4 with 9 matches = 33
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 5 with 6 matches = 51
+ 
+Comparing 5 with 7 matches = 66
+ 
+Comparing 5 with 8 matches = 13
+ 
+Comparing 5 with 9 matches = 32
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 6 with 7 matches = 101
+ 
+Comparing 6 with 8 matches = 11
+ 
+Comparing 6 with 9 matches = 25
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 7 with 8 matches = 15
+ 
+Comparing 7 with 9 matches = 203
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 8 with 9 matches = 17
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 1 with 2 matches = 39
+ 
+Comparing 1 with 3 matches = 62
+ 
+Comparing 1 with 4 matches = 33
+ 
+Comparing 1 with 5 matches = 40
+ 
+Comparing 1 with 6 matches = 47
+ 
+Comparing 1 with 7 matches = 75
+ 
+Comparing 1 with 8 matches = 12
+ 
+Comparing 1 with 9 matches = 34
+ 
+ 
+ 
+Comparing 2 with 3 matches = 85
+ 
+Comparing 2 with 4 matches = 26
+ 
+Comparing 2 with 5 matches = 44
+ 
+Comparing 2 with 6 matches = 128
+ 
+Comparing 2 with 7 matches = 62
+ 
+Comparing 2 with 8 matches = 11
+ 
+Comparing 2 with 9 matches = 31
+ 
+ 
+ 
+ 
+Comparing 3 with 4 matches = 62
+ 
+Comparing 3 with 5 matches = 64
+ 
+Comparing 3 with 6 matches = 93
+ 
+Comparing 3 with 7 matches = 125
+ 
+Comparing 3 with 8 matches = 22
+ 
+Comparing 3 with 9 matches = 67
+ 
+ 
+ 
+ 
+ 
+Comparing 4 with 5 matches = 31
+ 
+Comparing 4 with 6 matches = 35
+ 
+Comparing 4 with 7 matches = 60
+ 
+Comparing 4 with 8 matches = 13
+ 
+Comparing 4 with 9 matches = 33
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 5 with 6 matches = 51
+ 
+Comparing 5 with 7 matches = 66
+ 
+Comparing 5 with 8 matches = 13
+ 
+Comparing 5 with 9 matches = 32
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 6 with 7 matches = 101
+ 
+Comparing 6 with 8 matches = 11
+ 
+Comparing 6 with 9 matches = 25
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 7 with 8 matches = 15
+ 
+Comparing 7 with 9 matches = 203
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 8 with 9 matches = 17
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 1 with 2 matches = 39
+ 
+Comparing 1 with 3 matches = 62
+ 
+Comparing 1 with 4 matches = 33
+ 
+Comparing 1 with 5 matches = 40
+ 
+Comparing 1 with 6 matches = 47
+ 
+Comparing 1 with 7 matches = 75
+ 
+Comparing 1 with 8 matches = 12
+ 
+Comparing 1 with 9 matches = 34
+ 
+ 
+ 
+Comparing 2 with 3 matches = 85
+ 
+Comparing 2 with 4 matches = 26
+ 
+Comparing 2 with 5 matches = 44
+ 
+Comparing 2 with 6 matches = 128
+ 
+Comparing 2 with 7 matches = 62
+ 
+Comparing 2 with 8 matches = 11
+ 
+Comparing 2 with 9 matches = 31
+ 
+ 
+ 
+ 
+Comparing 3 with 4 matches = 62
+ 
+Comparing 3 with 5 matches = 64
+ 
+Comparing 3 with 6 matches = 93
+ 
+Comparing 3 with 7 matches = 125
+ 
+Comparing 3 with 8 matches = 22
+ 
+Comparing 3 with 9 matches = 67
+ 
+ 
+ 
+ 
+ 
+Comparing 4 with 5 matches = 31
+ 
+Comparing 4 with 6 matches = 35
+ 
+Comparing 4 with 7 matches = 60
+ 
+Comparing 4 with 8 matches = 13
+ 
+Comparing 4 with 9 matches = 33
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 5 with 6 matches = 51
+ 
+Comparing 5 with 7 matches = 66
+ 
+Comparing 5 with 8 matches = 13
+ 
+Comparing 5 with 9 matches = 32
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 6 with 7 matches = 101
+ 
+Comparing 6 with 8 matches = 11
+ 
+Comparing 6 with 9 matches = 25
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 7 with 8 matches = 15
+ 
+Comparing 7 with 9 matches = 203
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comparing 8 with 9 matches = 17
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

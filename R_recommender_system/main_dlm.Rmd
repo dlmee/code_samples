@@ -1,0 +1,278 @@
+---
+title: "Book Recommender"
+output:
+  html_document:
+    df_print: paged
+---
+
+### Initial Exploration of Data
+
+```{r}
+library(reshape2)
+library(dplyr)
+setwd("/home/dlmee/Info523/Book_Recommender")
+result <- read.csv(file = "Books.csv")
+ratings <- read.csv(file = "Ratings.csv")
+
+search <- ratings[ratings$Book.Rating != '0',]
+
+#Get rid of rows that occur less than 60 times. This is making sure that we're only getting reviewers who consistently review. 
+df2 <- search %>%
+  group_by(User.ID) %>%
+  filter(n() >= 60)
+
+# Find everyone who rates at least one a ten, make it distinct
+df3 <- df2 %>%
+  filter(grepl('10', Book.Rating)) %>%
+  distinct(User.ID, .keep_all = TRUE)
+
+# Find users who rated at least 4 books a 10
+features <- df3 %>%
+  group_by(ISBN) %>%
+  filter(n() >= 4) %>%
+  distinct(ISBN, .keep_all = TRUE)
+
+superusers <- pull(features, User.ID)
+superbooks <- pull(features, ISBN)
+
+# Just in case we're curious
+curious <- result[result$ISBN %in% superbooks,]
+
+
+#Now to build the features function. 
+featselect <- function(superusers, ratings){
+  features <- list()
+  for (super in superusers){
+    step <- ratings %>%
+      filter(grepl(super, User.ID))
+    feature <- list()
+    for (row in 1:nrow(step)){
+      allusers <- ratings %>%
+        filter(grepl(step[row,2], ISBN)) %>%
+        filter(grepl(step[row,3], Book.Rating)) %>%
+        pull(User.ID)
+      #print(c("Finished a run:", row, length(allusers)))
+      feature <- c(feature, list(allusers))
+    }
+  feature <- unlist(feature, recursive = TRUE)
+  feature <- unique(feature)
+  print(c("finished a feature:", length(feature)))
+  features <- c(features, list(feature))
+  }
+  return (features)
+}
+
+features <- featselect(superusers, search)
+
+features[[1]]
+
+# Let's write that to a csv
+#capture.output(features, file = "features.csv")
+
+
+#Let's see how much these two intersect, I'm pretty happy with this. 85 overlap between collectively 1600 in a pair, fairly distinct.
+#If we wanted we could remove these users...I'll leave them for now. 
+for (i in 1:length(features)){
+  base <- features[[i]]
+  for (j in 1:length(features)){
+    if (i < j){
+      reach <- features[[j]]
+      br <- intersect(base, reach)
+      brfinal <- paste("Comparing", i, "with", j, "matches =", length(br), sep = ' ')
+      write(brfinal, file = "similarity.txt", append = TRUE)
+    }
+  write(" ", "similarity.txt", append = TRUE)
+  }
+}
+
+
+#Now with these lists of users, we simply need to go one step further, and add their scores to a row, so we have pairs of ISBN and cumulative scores. These will be one step prior to our true features
+
+# We'll need a df with a single column that has all items. 
+items <- result %>%
+  select(ISBN)
+
+#Let's transform this into a function.
+
+feat2item <- function(features, items, ratings){
+  for (i in seq_along(features)){
+    title <- paste("feature", i, sep = '')
+    items[[title]] <- 1
+  draw <- ratings %>%
+    filter(User.ID %in% features[[i]])
+  for (row in 1:nrow(draw)){
+  cbook <- draw[row,2]
+  cscore <-draw[row,3]
+  original <- items[items$ISBN == cbook,] %>%
+    pull(title)
+  items[title][items['ISBN'] == cbook] <- cscore + original
+    }
+  }
+  return (items)
+}
+
+
+#itemfeatures <- feat2item(features, itsampler, search)
+#write.csv(itemfeatures, file = "itemfeatures.csv")
+
+itemfeatures <- read.csv("itemfeatures.csv")
+itemfeatures[itemfeatures == 1] <- NA
+
+itsampler <- itemfeatures %>%
+  slice_sample(n =500)
+itsampler <- itsampler[-1]
+itsampler[is.na(itsampler)] = 0
+#itsampler <- mutate_if(itsampler, is.numeric & , ~ . / 10)
+
+slice_head(itsampler, n = 20)
+
+
+#Now to build feat2user. Just like with above, I need to create a user dataframe with a single column. 
+
+users <- ratings %>%
+  distinct(User.ID) %>%
+  select(User.ID)
+
+#a little helper function for the comparison. 
+#all.eqNum <- function(x,y) as.numeric(sub(".*:", '', all.equal(x,y))) 
+# Found the above code snippet on rdocumentation.org, awesome! Thanks!
+
+#Interestingly whereas with feat2item we went column, by column, here it's going to be row by row. We treat a user entirely, then move on. How interesting!
+
+feat2user <- function(features, users, ratings){
+  for (i in seq_along(features)){
+    title <- paste("feature", i, sep = '')
+    users[[title]] <- .1
+  }
+  # For user
+  for (row in 1:nrow(users)){
+    #Grab that users reviews
+    interest <- ratings %>%
+      filter(User.ID == users[row,1])
+    
+    for (i in seq_along(features)){
+      #iterate through feature
+      #Remove current user from feature if present
+      cfeat <- features[[i]] 
+      cfeat <- cfeat[cfeat != users[row,1]]
+      
+      #Select all ratings from those users.
+      supint <- ratings %>%
+        filter(User.ID %in% cfeat)
+      
+      #Intersect those by book title then multiply by rating
+      relationship <- inner_join(interest, supint, by = "ISBN") 
+      #Take that result and add as the feature value to the user. If there is any intersection at all!
+      if (dim(relationship)[1] != 0){
+        if (all.equal(relationship$Book.Rating.x, relationship$Book.Rating.y) == TRUE){
+          users[row, i+1] <- 1
+        } else {
+          users[row, i+1] <- all.eqNum(relationship$Book.Rating.x, relationship$Book.Rating.y)
+      }
+      
+      }
+    }
+  }
+  # For feature
+  # Compare user against feature (i.e. superuser)
+  # How similar are the ratings between the user and the superuser. 
+  return (users)
+}
+
+#users <- feat2user(features, sampler, search)
+#write.csv(users, file = "userfeatures.csv")
+
+userfeatures <- read.csv("userfeatures.csv")
+userfeatures[userfeatures < .11] <- NA
+
+sampler <- userfeatures %>%
+  slice_sample(n =500)
+sampler <- sampler[-1]
+sampler <- mutate_if(sampler, is.numeric, ~ . * 100)
+sampler[is.na(sampler)] = 0
+
+slice_head(sampler, n = 20)
+
+
+# Now use Matrix Factorization to fill in missing scores. 
+
+factorization <- function(tbf, steps, alpha, beta, featcount){
+  saved <- tbf[1]
+  tbf <- tbf[-1]
+  tbf <- data.matrix(tbf)
+  P <- matrix(sample(1:featcount, replace = TRUE)/10, nrow=nrow(tbf), ncol=featcount)
+  Q <- matrix(sample(1:featcount, replace = TRUE)/10, nrow=ncol(tbf), ncol=featcount)
+  Q <-t(Q)
+  counter <- 0
+  for (step in 1:steps){
+    for (i in 1:nrow(tbf)){
+      for (j in 1:ncol(tbf)){
+        if(tbf[i,j] > 0){
+          #grab both values as vectors
+          loss <- tbf[i,j] - P[i,] %*% Q[,j]
+          loss <- loss[1,1]
+          for (feat in 1:featcount){ #update our two tables. 
+            counter <- counter +1
+            P[i,feat] <- P[i,feat] + alpha * (2 * loss * Q[feat,j] - beta * P[i,feat]) #Something not working here. I'll finish this tomorrow. then be done!
+            Q[feat,j] <- Q[feat,j] + alpha * (2 * loss * P[i,feat] - beta * Q[feat,j])
+          }
+        }
+      }
+    }
+  }
+  print(counter)
+  reconstituted <- P %*% Q
+  answer <- as.data.frame(reconstituted) %>%
+    mutate(saved, .before = 1)
+  return (answer)
+}
+
+factored <- factorization(sampler, 500, .0001, .002, 9)
+
+slice_head(factored, n = 20)
+
+ifactored <-factorization(itsampler, 1000, .001, .02, 9)
+
+slice_head(factored, n = 20)
+
+#And finally make a recommendation based on the interaction between a user and the books
+
+recommender <- function(target, users, items){
+  tfeature <- users %>%
+    filter(User.ID == target) %>%
+    melt(id.vars = 1) %>%
+    pull(value)
+  print(tfeature)
+  r_matrix <- items %>%
+    select(ISBN) %>%
+    mutate(target = 0)
+  for (row in 1:nrow(items)){
+    rfeat <- items %>%
+      slice(row) %>%
+      melt(id.vars = 1) %>%
+      pull(value)
+    rfeat <- as.numeric(rfeat)
+    r_matrix[row,2] <- tfeature %*% rfeat
+  }  
+  return (r_matrix)
+}
+
+#Need to make the user queried a random user from the known sample in factored. 
+sampleuser <- factored %>%
+  slice_sample(n = 1) %>%
+  pull(User.ID)
+  
+
+recommendation <- recommender(sampleuser, factored, ifactored)
+books <- recommendation %>%
+  arrange(target) %>%
+  slice_tail(n =10) %>%
+  pull(ISBN)
+
+#Let's just take a look at the top ten recommendations
+curious <- result[result$ISBN %in% books,]
+curious$Book.Title
+
+```
+
+
